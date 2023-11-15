@@ -16,11 +16,16 @@ public class ArrayQueue {
         return array.length == count;
     }
 
+    public boolean isEmpty(){
+        return count == 0;
+    }
+
     public void enqueue(int num){
         if (isFull())
             throw new IllegalStateException();
         array[rear] = num;
-        rear = (rear
+        rear = (rear + 1) % array.length;
+        count++;
     }
 
     public int dequeue(){
@@ -32,9 +37,14 @@ public class ArrayQueue {
         count--;
         return item;
     }
-    public boolean isEmpty(){
-        return count == 0;
+
+    public int peek(){
+        if (isEmpty())
+            throw new IllegalStateException();
+        else
+            return array[front];
     }
+
 
     @Override
     public String toString(){
